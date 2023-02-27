@@ -1,0 +1,105 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "users": [
+    {
+      "email": "meet@gmail.com",
+      "password": "123123",
+      "checkPassword": "123123",
+      "nickname": "meet",
+      "phoneNumberPrefix": "+91",
+      "phoneNumber": "3578965445",
+      "dateOfBirth": "01/09/1997",
+      "agree": true,
+      "gender": "male",
+      "id": 3
+    },
+    {
+      "email": "meet@gmail.com",
+      "password": "123123",
+      "checkPassword": "123123",
+      "nickname": "meet",
+      "phoneNumberPrefix": "+91",
+      "phoneNumber": "3578965445",
+      "dateOfBirth": "01/09/1997",
+      "agree": true,
+      "gender": "male",
+      "id": 5
+    },
+    {
+      "email": "meet@gmail.com",
+      "password": "123123",
+      "checkPassword": "123123",
+      "nickname": "meet",
+      "phoneNumberPrefix": "+91",
+      "phoneNumber": "32321",
+      "dateOfBirth": "01/09/1997",
+      "gender": "male",
+      "agree": true,
+      "id": 7
+    },
+    {
+      "email": "meet@gmail.com",
+      "password": "123123",
+      "checkPassword": "123123",
+      "nickname": "meet",
+      "phoneNumberPrefix": "+91",
+      "phoneNumber": "3578965445",
+      "dateOfBirth": "01/09/1997",
+      "agree": true,
+      "gender": "male",
+      "id": 8
+    },
+    {
+      "email": "meet@gmail.com",
+      "password": "123123",
+      "checkPassword": "123123",
+      "nickname": "meet",
+      "phoneNumberPrefix": "+91",
+      "phoneNumber": "654987123",
+      "dateOfBirth": "2001-06-19T18:30:00.000Z",
+      "gender": "male",
+      "agree": true,
+      "id": 9
+    },
+    {
+      "email": "meet@gmail.com",
+      "password": "123",
+      "checkPassword": "123",
+      "nickname": "meet",
+      "phoneNumberPrefix": "+86",
+      "phoneNumber": "8200005228",
+      "dateOfBirth": "2023-02-22T07:28:28.973Z",
+      "gender": "male",
+      "agree": true,
+      "id": 11
+    },
+    {
+      "email": "meet@yahoo.com",
+      "password": "123123",
+      "checkPassword": "123123",
+      "nickname": "meet",
+      "phoneNumberPrefix": "+86",
+      "phoneNumber": "8200005228",
+      "dateOfBirth": "2023-02-27T12:32:20.047Z",
+      "gender": "male",
+      "agree": true,
+      "id": 12
+    }
+  ]
+}

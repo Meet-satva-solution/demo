@@ -1,0 +1,101 @@
+<div nz-row nzJustify="center">
+  <div nz-col>
+    <nz-card nzTitle="New User Form">
+      <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" (change)="validForm()">
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+            <input nz-input formControlName="email" id="email" [nzAutocomplete]="auto" placeholder="Enter your email id"
+              (input)="onInput($event)" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Password</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
+            <nz-input-group [nzSuffix]="suffixTemplate">
+              <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="input password"
+                formControlName="password" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="9" [nzXs]="24" nzFor="checkPassword" nzRequired>Confirm Password</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
+            <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
+            <ng-template #errorTpl let-control>
+              <ng-container *ngIf="control.hasError('required')">Please confirm your password!</ng-container>
+              <ng-container *ngIf="control.hasError('confirm')">
+                Two passwords that you enter is inconsistent!
+              </ng-container>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="nickname" nzRequired
+            nzTooltipTitle="What do you want other to call you">
+            <span>Nickname</span>
+          </nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname!">
+            <input nz-input id="nickname" formControlName="nickname" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="phoneNumber" nzRequired>Phone Number</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="validateForm.controls['phoneNumber']"
+            nzErrorTip="Please input your phone number!">
+            <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+              <ng-template #addOnBeforeTemplate>
+                <nz-select formControlName="phoneNumberPrefix" class="phone-select">
+                  <nz-option nzLabel="+86" nzValue="+86"></nz-option>
+                  <nz-option nzLabel="+91" nzValue="+91"></nz-option>
+                </nz-select>
+              </ng-template>
+              <input formControlName="phoneNumber" id="'phoneNumber'" nz-input />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="dob" nzRequired>Date of Birth</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input birth date">
+            <nz-date-picker formControlName="dateOfBirth" type="date" nzAllowClear="false"
+              nzFormat="dd/MM/yyyy"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="gender" nzRequired>Gender</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input birth date">
+            <nz-radio-group formControlName="gender">
+              <label nz-radio nzValue="male">Male</label>
+              <label nz-radio nzValue="female">Female</label>
+            </nz-radio-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row class="register-area">
+          <nz-form-control [nzSpan]="24" [nzOffset]="3" nzErrorTip="Please agree terms">
+            <label nz-checkbox formControlName="agree" nzRequired>
+              <span>
+                I am agree with the
+                <a>terms and conditions</a>
+              </span>
+            </label>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-spin [nzSpinning]="isSpinning">
+          <nz-form-item nz-row class="register-area" [nzJustify]=" content">
+            <nz-form-control [nzSpan]="10" [nzOffset]="6">
+              <button nz-button (mouseover)="registerButton()" nzType="primary">Register</button>
+            </nz-form-control>
+          </nz-form-item>
+        </nz-spin>
+      </form>
+    </nz-card>
+  </div>
+</div>
+
+<ng-template #suffixTemplate>
+  <span nz-icon [nzType]="passwordVisible ? 'eye' :'eye-invisible'" (click)="passwordVisible = !passwordVisible"></span>
+</ng-template>
+
+<nz-autocomplete #auto>
+  <nz-auto-option *ngFor="let option of options" [nzValue]="option">{{ option }}</nz-auto-option>
+</nz-autocomplete>

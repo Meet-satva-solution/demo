@@ -1,0 +1,48 @@
+<div nz-row nzJustify="center">
+    <div nz-col>
+        <nz-card nzTitle="Feedback Form" [nzExtra]="">
+            <form nz-form [formGroup]="feedbackForm" (ngSubmit)="submitForm()">
+                <nz-form-item>
+                    <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="name" nzRequired>
+                        <span>Name</span>
+                    </nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your name!">
+                        <input nz-input id="name" formControlName="name" />
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="rating" nzRequired>
+                        <span>Rating</span>
+                    </nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <nz-rate formControlName="rating" nzAllowHalf></nz-rate>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="comment" nzRequired>
+                        <span>Comment</span>
+                    </nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your comment">
+                        <nz-input-group [nzSuffix]="textAreaClearTpl"
+                            class="ant-input-affix-wrapper-textarea-with-clear-btn">
+                            <textarea nz-input placeholder="Add your comment" formControlName="comment"
+                                [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-spin [nzSpinning]="isSpinning">
+                    <nz-form-item nz-row class="register-area">
+                        <nz-form-control [nzSpan]="10" [nzOffset]="6">
+                            <button nz-button nzType="primary" [disabled]="feedbackForm.invalid">Send Feedback</button>
+                        </nz-form-control>
+                    </nz-form-item>
+                </nz-spin>
+            </form>
+        </nz-card>
+    </div>
+</div>
+
+<ng-template #textAreaClearTpl>
+    <span nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle" *ngIf="textValue"
+        (click)="textValue = null"></span>
+</ng-template>

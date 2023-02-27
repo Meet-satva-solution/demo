@@ -1,0 +1,41 @@
+<div nz-row nzJustify="end">
+  <span nz-tooltip [nzTooltipTitle]="toolTipText">
+    <nz-badge nzSize="default" [nzCount]="UserDetails.length">
+      <span nz-icon nzType="user" style="font-size: 30px;" nzTheme="outline"></span>
+    </nz-badge>
+  </span>
+</div>
+<nz-table #basicTable [nzData]="UserDetails" [nzScroll]="{ x: '950px' }">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone Number</th>
+      <th>Date of Birth</th>
+      <th>Gender</th>
+      <th nzRight>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of UserDetails">
+      <td>{{ data.nickname }}</td>
+      <td>{{ data.email }}</td>
+      <td>{{ data.phoneNumberPrefix }} {{ data.phoneNumber }}</td>
+      <td>{{data.dateOfBirth | date: 'dd/MM/yyyy'}}</td>
+      <td>{{data.gender}}</td>
+      <td nzRight>
+        <a (click)="editUser(data.id)" class="text-blue">Edit</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a nz-popconfirm [nzPopconfirmVisible]="popVisiblity" [nzIcon]="iconTpl"
+          nzPopconfirmTitle="Are you sure delete this user?" nzPopconfirmPlacement="bottom"
+          (nzOnConfirm)="deleteUser(data.id)" (nzOnCancel)="popVisiblity = false;" class="text-red">
+          Delete
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+
+<ng-template #iconTpl>
+  <span nz-icon nzType="question-circle-o" style="color: red;"></span>
+</ng-template>

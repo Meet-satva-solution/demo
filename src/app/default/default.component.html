@@ -1,0 +1,9 @@
+<nz-carousel nzAutoPlay="true" [nzAutoPlaySpeed]="speed" nzEffect="fade">
+    <div nz-carousel-content *ngFor="let item of imageArray">
+        <img nz-image width="200px" height="200px" [nzSrc]="item" alt="" />
+    </div>
+</nz-carousel>
+<div class="slider">
+    <p>Move Slider for the delay speed of animations</p>
+    <nz-slider   [(ngModel)]="speed" nzStep="1000" nzMax="10000"></nz-slider>
+</div>
