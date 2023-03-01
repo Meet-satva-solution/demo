@@ -25,13 +25,15 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzRateModule } from 'ng-zorro-antd/rate';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
-
+import { TotalUserComponent } from './total-user/total-user.component';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
 
 @NgModule({
   declarations: [
     NewUserComponent,
     ViewUserComponent,
-    FeedbackComponent
+    FeedbackComponent,
+    TotalUserComponent,
   ],
   imports: [
     CommonModule,
@@ -55,7 +57,8 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
     NzToolTipModule,
     NzAutocompleteModule,
     NzRateModule,
-    NzSpinModule
-  ]
+    NzSpinModule,
+    NzAlertModule,
+  ],
 })
-export class PagesModule { }
+export class PagesModule {}

@@ -1,0 +1,18 @@
+<span nz-tooltip [nzTooltipTitle]="toolTipText" (click)="showAlert()">
+  <nz-badge nzSize="default" [nzCount]="totalUser">
+    <span
+      nz-icon
+      nzType="user"
+      style="font-size: 30px"
+      nzTheme="outline"
+    ></span>
+  </nz-badge>
+</span>
+<nz-alert
+  *ngIf="alert"
+  nzType="info"
+  nzMessage="Info Text"
+  nzCloseable="true"
+  [nzMessage]="alertMessage"
+  (nzOnClose)="alert = false"
+></nz-alert>

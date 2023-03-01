@@ -1,9 +1,14 @@
 <div nz-row nzJustify="end">
-  <span nz-tooltip [nzTooltipTitle]="toolTipText">
-    <nz-badge nzSize="default" [nzCount]="UserDetails.length">
+  <!-- <span nz-tooltip [nzTooltipTitle]="toolTipText">
+    <nz-badge nzSize="default" [nzCount]="userList.length">
       <span nz-icon nzType="user" style="font-size: 30px;" nzTheme="outline"></span>
     </nz-badge>
-  </span>
+  </span> -->
+  <app-total-user
+    [totalUser]="userList.length"
+    [toolTipText]="toolTipText"
+    (onAlert)="AlertShowing()"
+  ></app-total-user>
 </div>
 <nz-table #basicTable [nzData]="UserDetails" [nzScroll]="{ x: '950px' }">
   <thead>
@@ -21,21 +26,38 @@
       <td>{{ data.nickname }}</td>
       <td>{{ data.email }}</td>
       <td>{{ data.phoneNumberPrefix }} {{ data.phoneNumber }}</td>
-      <td>{{data.dateOfBirth | date: 'dd/MM/yyyy'}}</td>
-      <td>{{data.gender}}</td>
+      <td>{{ data.dateOfBirth | date : "dd/MM/yyyy" }}</td>
+      <td>{{ data.gender }}</td>
       <td nzRight>
         <a (click)="editUser(data.id)" class="text-blue">Edit</a>
         <nz-divider nzType="vertical"></nz-divider>
-        <a nz-popconfirm [nzPopconfirmVisible]="popVisiblity" [nzIcon]="iconTpl"
-          nzPopconfirmTitle="Are you sure delete this user?" nzPopconfirmPlacement="bottom"
-          (nzOnConfirm)="deleteUser(data.id)" (nzOnCancel)="popVisiblity = false;" class="text-red">
+        <a
+          nz-popconfirm
+          [nzPopconfirmVisible]="popVisiblity"
+          [nzIcon]="iconTpl"
+          nzPopconfirmTitle="Are you sure delete this user?"
+          nzPopconfirmPlacement="bottom"
+          (nzOnConfirm)="deleteUser(data.id)"
+          (nzOnCancel)="popVisiblity = false"
+          class="text-red"
+        >
           Delete
         </a>
       </td>
     </tr>
   </tbody>
 </nz-table>
+<div>
+  <li *ngFor="let user of userList">
+    {{ user.name }}
+  </li>
+</div>
+
+<div>
+  <input type="text" #addUser />
+  <button (click)="addNewUser(addUser)">Add User</button>
+</div>
 
 <ng-template #iconTpl>
-  <span nz-icon nzType="question-circle-o" style="color: red;"></span>
+  <span nz-icon nzType="question-circle-o" style="color: red"></span>
 </ng-template>

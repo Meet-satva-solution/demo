@@ -1,26 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { withLatestFrom } from 'rxjs';
 import { UserService } from '../../_service';
 
 @Component({
   selector: 'app-view-user',
   templateUrl: './view-user.component.html',
-  styleUrls: ['./view-user.component.scss']
+  styleUrls: ['./view-user.component.scss'],
 })
 export class ViewUserComponent implements OnInit {
   UserDetails: any = [];
   popVisiblity: boolean = false;
   toolTipText: string = '';
+  userList: any = [];
 
-  constructor(
-    private userService: UserService,
-    private router: Router
-  ) { }
+  constructor(public userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.getUser();
+    this.userService.getUsers();
+    this.userService.data$.subscribe((res) => {
+      this.userList = res;
+      this.toolTipText = `There are ${this.userList.length} users`;
+    });
   }
 
+  addNewUser(addUser: any) {
+    var request = {
+      name: addUser.value,
+      id: this.userList.length + 1,
+    };
+    this.userService.addData(request);
+  }
   /**
    * To get the user details
    */
@@ -31,9 +42,12 @@ export class ViewUserComponent implements OnInit {
     });
   }
 
+  AlertShowing() {
+    console.log('alertShowing');
+  }
   /**
    * To delete the user
-   * @param id to be deleted 
+   * @param id to be deleted
    */
   deleteUser(id: any) {
     this.userService.deleteUser(id).subscribe((user) => {
@@ -44,11 +58,10 @@ export class ViewUserComponent implements OnInit {
   }
 
   /**
-   * to edit the user 
+   * to edit the user
    * @param id to be edited
    */
   editUser(id: any) {
     this.router.navigate(['/user/new', id]);
   }
-
 }

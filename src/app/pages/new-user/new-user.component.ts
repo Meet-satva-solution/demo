@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BooleanInput } from 'ng-zorro-antd/core/types';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
@@ -8,10 +13,9 @@ import { UserService } from '../../_service';
 @Component({
   selector: 'app-new-user',
   templateUrl: './new-user.component.html',
-  styleUrls: ['./new-user.component.scss']
+  styleUrls: ['./new-user.component.scss'],
 })
 export class NewUserComponent implements OnInit {
-
   id: any = this.route.snapshot.paramMap.get('id');
   passwordVisible = false;
   password?: string;
@@ -19,15 +23,21 @@ export class NewUserComponent implements OnInit {
   options: string[] = [];
   isSpinning: BooleanInput = false;
   validateForm!: FormGroup;
+  activeId: any;
 
   constructor(
     private fb: UntypedFormBuilder,
     private UserService: UserService,
     private route: ActivatedRoute,
-    private router: Router
-  ) { }
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit() {
+    this.activatedRoute.paramMap.subscribe((params: any) => {
+      this.activeId = params.get('id');
+      console.log('activated id', this.activeId);
+    });
     this.formInitialization();
     if (this.id) {
       this.getUser(this.id);
@@ -49,7 +59,7 @@ export class NewUserComponent implements OnInit {
   }
 
   /**
-   * To Submit the form 
+   * To Submit the form
    */
   submitForm() {
     if (this.validateForm.valid) {
@@ -86,7 +96,9 @@ export class NewUserComponent implements OnInit {
    * to update the check password field is valid or not
    */
   updateConfirmValidator(): void {
-    Promise.resolve().then(() => this.validateForm.controls['checkPassword'].updateValueAndValidity());
+    Promise.resolve().then(() =>
+      this.validateForm.controls['checkPassword'].updateValueAndValidity()
+    );
   }
 
   /**
@@ -94,7 +106,9 @@ export class NewUserComponent implements OnInit {
    * @param control untyped form control
    * @returns the error control value
    */
-  confirmationValidator = (control: UntypedFormControl): { [s: string]: boolean; } => {
+  confirmationValidator = (
+    control: UntypedFormControl
+  ): { [s: string]: boolean } => {
     if (!control.value) {
       return { required: true };
     } else if (control.value !== this.validateForm.controls['password'].value) {
@@ -111,9 +125,14 @@ export class NewUserComponent implements OnInit {
     this.validateForm = this.fb.group({
       email: [data?.email, [Validators.email, Validators.required]],
       password: [data?.password, [Validators.required]],
-      checkPassword: [data?.checkPassword, [Validators.required, this.confirmationValidator]],
+      checkPassword: [
+        data?.checkPassword,
+        [Validators.required, this.confirmationValidator],
+      ],
       nickname: [data?.nickname, [Validators.required]],
-      phoneNumberPrefix: [data?.phoneNumberPrefix ? data?.phoneNumberPrefix : '+86'],
+      phoneNumberPrefix: [
+        data?.phoneNumberPrefix ? data?.phoneNumberPrefix : '+86',
+      ],
       phoneNumber: [data?.phoneNumber, [Validators.required]],
       dateOfBirth: [data?.dateOfBirth, [Validators.required]],
       gender: [data?.gender, [Validators.required]],
@@ -126,7 +145,7 @@ export class NewUserComponent implements OnInit {
    */
   registerButton() {
     if (this.validateForm.invalid) {
-      this.content == 'end' ? this.content = 'start' : this.content = 'end';
+      this.content == 'end' ? (this.content = 'start') : (this.content = 'end');
     }
   }
 
@@ -139,8 +158,9 @@ export class NewUserComponent implements OnInit {
     if (!value || value.indexOf('@') >= 0) {
       this.options = [];
     } else {
-      this.options = ['gmail.com', 'hotmail.com', 'yahoo.com'].map(domain => `${value}@${domain}`);
+      this.options = ['gmail.com', 'hotmail.com', 'yahoo.com'].map(
+        (domain) => `${value}@${domain}`
+      );
     }
   }
-
 }
