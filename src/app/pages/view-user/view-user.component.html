@@ -55,7 +55,7 @@
 
 <div>
   <input type="text" #addUser />
-  <button (click)="addNewUser(addUser)">Add User</button>
+  <button (click)="addNewUser(addUser);addUser.value = ''">Add User</button>
 </div>
 
 <ng-template #iconTpl>
